@@ -43,14 +43,23 @@ dependencies:
   json_annotation: ^4.8.1
   envied: ^0.3.0+3
   easy_localization: ^3.0.3
+  
+  #Utility
+  logger: ^2.0.2+1
+  google_fonts: ^6.1.0
+ 
+  #Navigation
+  auto_route: ^7.8.4
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  very_good_analysis: ^5.1.0
   build_runner: ^2.4.6
+  very_good_analysis: ^5.1.0
   flutter_gen_runner: ^5.3.2
   flutter_launcher_icons: ^0.13.1  
+  auto_route_generator: ^7.3.2
+
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
