@@ -22,10 +22,11 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             const Text('Home'),
             ElevatedButton(
-                onPressed: () {
-                  context.pushRoute(const LoginRoute());
-                },
-                child: const Text('logine gidiş'),),
+              onPressed: () {
+                context.pushRoute(const LoginRoute());
+              },
+              child: const Text('logine gidiş'),
+            ),
           ],
         ),
       ),
