@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "732157292536",
+    "project_id": "project-y-c2de2",
+    "storage_bucket": "project-y-c2de2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:732157292536:android:2602f53e2a6d550563b00d",
+        "android_client_info": {
+          "package_name": "com.example.tubitak_2"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAO09vY4CQlfSdrgjDPLkk8w-a_JwW2TNk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

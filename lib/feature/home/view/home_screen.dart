@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, avoid_unnecessary_containers
 
 import 'package:auto_route/auto_route.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:tubitak_2/product/navigation/app_router.dart';
 
@@ -26,6 +27,18 @@ class _HomeScreenState extends State<HomeScreen> {
                 context.pushRoute(const LoginRoute());
               },
               child: const Text('logine gidiş'),
+            ),
+            ElevatedButton(
+              onPressed: () async {
+                await FirebaseAuth.instance.signOut();
+              },
+              child: const Text('Çıkış Yap'),
+            ),
+            ElevatedButton(
+              onPressed: () async {
+                await context.pushRoute(const ProfileRoute());
+              },
+              child: const Text('profile gidiş'),
             ),
           ],
         ),

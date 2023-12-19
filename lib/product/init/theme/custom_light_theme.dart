@@ -1,4 +1,4 @@
-// ignore_for_file: always_use_package_imports
+// ignore_for_file: always_use_package_imports, lines_longer_than_80_chars
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -15,6 +15,11 @@ final class CustomLightTheme implements CustomTheme {
         textTheme: const TextTheme(
           headlineSmall: TextStyle(color: ColorConstants.primaryColor),
           titleMedium: TextStyle(color: ColorConstants.greyPrimary),
+        ),
+        inputDecorationTheme: InputDecorationTheme(
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(8),
+          ),
         ),
       );
 }
