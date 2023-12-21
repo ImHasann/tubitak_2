@@ -10,13 +10,26 @@ import 'custom_theme.dart';
 final class CustomLightTheme implements CustomTheme {
   @override
   ThemeData get themeData => ThemeData(
+        colorScheme: const ColorScheme.light(
+          primary: ColorConstants.primaryColor,
+        ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            foregroundColor: ColorConstants.white,
+            backgroundColor: ColorConstants.primaryColor, // Buton rengi
+          ),
+        ),
         useMaterial3: true,
         fontFamily: GoogleFonts.dmSans().fontFamily,
         textTheme: const TextTheme(
-          headlineSmall: TextStyle(color: ColorConstants.primaryColor),
+          headlineSmall: TextStyle(color: ColorConstants.blackPrimary),
           titleMedium: TextStyle(color: ColorConstants.greyPrimary),
+          headlineMedium: TextStyle(color: Colors.blue),
+          bodySmall: TextStyle(color: ColorConstants.greyPrimary),
+          bodyMedium: TextStyle(color: ColorConstants.greyPrimary),
         ),
         inputDecorationTheme: InputDecorationTheme(
+          labelStyle: const TextStyle(color: ColorConstants.greyPrimary),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(8),
           ),

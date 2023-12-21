@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      
+      debugShowCheckedModeBanner: false,
       localizationsDelegates: [
         firebaseLcl.FirebaseUILocalizations.withDefaultOverrides(
           const LabelOverrides(),
@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
         GlobalWidgetsLocalizations.delegate,
         firebaseLcl.FirebaseUILocalizations.delegate,
       ],
-      title: 'Flutter Demo',
+      title: 'Tübitak 2',
       theme: CustomLightTheme().themeData,
       themeMode: ThemeMode.light,
       routerConfig: _appRouter.config(),

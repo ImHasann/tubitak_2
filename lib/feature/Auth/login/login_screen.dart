@@ -7,9 +7,7 @@ import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:kartal/kartal.dart';
-import 'package:tubitak_2/feature/Auth/constants/text_constants.dart';
-import 'package:tubitak_2/feature/Auth/login/login_provider.dart';
-import 'package:tubitak_2/product/utility/widgets/Auth/Text/info_about_screen_text.dart';
+import 'package:tubitak_2/product/navigation/app_router.dart';
 
 @RoutePage()
 class LoginScreen extends ConsumerStatefulWidget {
@@ -20,20 +18,6 @@ class LoginScreen extends ConsumerStatefulWidget {
 }
 
 class _LoginScreenState extends ConsumerState<LoginScreen> {
-  final loginProvider = StateNotifierProvider<LoginNotifier, LoginNotifierState>((ref) {
-    return LoginNotifier();
-  });
-
-  @override
-  void initState() {
-    super.initState();
-    checkUser(FirebaseAuth.instance.currentUser);
-  }
-
-  void checkUser(User? user) {
-    ref.read(loginProvider.notifier).fetchUserDetail(user);
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,28 +25,40 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
         padding: context.padding.low,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            const SingleChildScrollView(
-              child: InfoTextAboutWidget(
-                primaryText: AuthStringConstants.primaryText,
-                secondaryText: AuthStringConstants.secondaryText,
-              ),
-            ),
-            context.sized.emptySizedHeightBoxLow,
-            SingleChildScrollView(
-              child: firebase.FirebaseUIActions(
-                actions: [
-                  AuthStateChangeAction<SignedIn>((context, state) {
-                    if (state.user != null) {
-                      checkUser(state.user);
-                    }
-                  }),
-                ],
-                child: firebase.LoginView(
-                  showTitle: false,
+            firebase.FirebaseUIActions(
+              actions: [
+                ForgotPasswordAction((context, email) {
+                  context.pushRoute(const ForgotPasswordRoute());
+                }),
+                AuthStateChangeAction<SignedIn>((context, state) async {
+                  if (state.user != null) {
+                    await context.pushRoute(const HomeRoute()); //kullanıcı girişi yaptıktan sonra ne olacak
+                  }
+                }),
+              ],
+              child: Expanded(
+                child: firebase.SignInScreen(
+                  headerBuilder: (context, constraints, _) {
+                    return Padding(
+                      padding: const EdgeInsets.all(20),
+                      child: Image.network('https://firebase.flutter.dev/img/flutterfire_300x.png'),
+                    );
+                  },
+                  showAuthActionSwitch:true,
+                  styles: const {
+                    EmailFormStyle(
+                      signInButtonVariant: ButtonVariant.filled,
+                    ),
+                  },
+                  subtitleBuilder: (context, action) {
+                    return Text(
+                      action == AuthAction.signIn
+                          ? 'Uygulamaya Hoşgelidiniz.Lütfen devam etmek için giriş yapın.'
+                          : 'Uygulamaya Hoşgelidiniz.Lütfen devam etmek için hesap oluşturunuz.',
+                    );
+                  },
                   showPasswordVisibilityToggle: true,
-                  action: firebase.AuthAction.signIn,
                   providers: firebase.FirebaseUIAuth.providersFor(FirebaseAuth.instance.app),
                 ),
               ),
@@ -73,59 +69,3 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     );
   }
 }
-
-
-// class LoginScreen extends StatelessWidget {
-//   const LoginScreen({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       body: Padding(
-//         padding: context.padding.medium,
-//         child: Column(
-//           crossAxisAlignment: CrossAxisAlignment.stretch,
-//           children: [
-//             const InfoTextAboutWidget(primaryText: AuthStringConstants.primaryText, secondaryText: AuthStringConstants.secondaryText),
-//             context.sized.emptySizedHeightBoxNormal,
-//             const ModernTextField(
-//               hintText: AuthStringConstants.email,
-//               prefixIcon: Icon(Icons.mail_outline),
-//             ),
-//             context.sized.emptySizedHeightBoxLow,
-//             const ModernTextField(
-//               hintText: AuthStringConstants.password,
-//               prefixIcon: Icon(Icons.lock_outline),
-//             ),
-//             Align(
-//               alignment: Alignment.centerRight,
-//               child: TextButton(
-//                 onPressed: null,
-//                 child: Text(
-//                   AuthStringConstants.forgotPassword,
-//                   style: Theme.of(context).textTheme.titleMedium,
-//                 ),
-//               ),
-//             ),
-//             PrimaryButton(buttonText: 'Sonraki', buttonFunction: () {}),
-//             const Spacer(),
-//             Center(
-//               child: TextButton(
-//                 onPressed: () {},
-//                 child: RichText(
-//                   text: TextSpan(
-//                     style: Theme.of(context).textTheme.titleMedium?.copyWith(color: ColorConstants.blackLighter),
-//                     children: const <TextSpan>[
-//                       TextSpan(text: 'Hesabınız Yok Mu? '),
-//                       TextSpan(text: 'Hesap Oluştur', style: TextStyle(fontWeight: FontWeight.bold, color: ColorConstants.blackPrimary)),
-//                     ],
-//                   ),
-//                 ),
-//               ),
-//             ),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }

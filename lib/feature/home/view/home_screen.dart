@@ -1,4 +1,4 @@
-// ignore_for_file: public_member_api_docs, avoid_unnecessary_containers
+// ignore_for_file: public_member_api_docs, avoid_unnecessary_containers, use_build_context_synchronously
 
 import 'package:auto_route/auto_route.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -31,6 +31,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ElevatedButton(
               onPressed: () async {
                 await FirebaseAuth.instance.signOut();
+                await context.pushRoute(const LoginRoute());
               },
               child: const Text('Çıkış Yap'),
             ),

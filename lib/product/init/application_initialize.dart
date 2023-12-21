@@ -21,6 +21,7 @@ final class ApplicationInitialize {
 
   Future<void> _initialize() async {
     WidgetsFlutterBinding.ensureInitialized();
+    
     await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
     await AppCache.instance.setup();
 
