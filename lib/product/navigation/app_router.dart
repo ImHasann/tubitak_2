@@ -6,6 +6,7 @@ import 'package:tubitak_2/feature/Auth/login/login_screen.dart';
 import 'package:tubitak_2/feature/Auth/profile/profile_screen.dart';
 import 'package:tubitak_2/feature/home/view/home_screen.dart';
 import 'package:tubitak_2/feature/splash/splash_screen.dart';
+import 'package:tubitak_2/feature/table%20calender/calender_screen.dart';
 
 part 'app_router.gr.dart';
 
@@ -18,7 +19,8 @@ class AppRouter extends _$AppRouter {
         ),
         AutoRoute(page: LoginRoute.page),
         AutoRoute(page: ForgotPasswordRoute.page),
-        AutoRoute(page: SplashRoute.page, initial: true),
+        AutoRoute(page: SplashRoute.page,initial: true),
         AutoRoute(page: ProfileRoute.page),
+        AutoRoute(page: CalenderRoute.page,),
       ];
 }

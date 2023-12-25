@@ -61,6 +61,9 @@ dependencies:
   firebase_ui_localizations: ^1.9.0
   flutter_localizations:
     sdk: flutter
+  table_calendar: ^3.0.9
+  cloud_firestore: ^4.13.6
+  firebase_messaging: ^14.7.9
 
 
 

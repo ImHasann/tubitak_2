@@ -17,5 +17,17 @@ class ColorConstants {
   static const Color white = Color(0xffffffff);
 
   static const Color blackLighter = Color(0xff555A77);
-  
+
+  /// Metric Page Colors
+  static const Color limeGreen = Color(0xff3fcc7c);
+
+  static const Color limeGreenWithOpac = Color.fromARGB(255, 171, 232, 197);
+
+  static const Color skyBlue = Color(0xff5ac8fa);
+
+  static const Color orange = Color(0xffff9500);
+
+  static const Color pink = Color(0xffe93e63);
+
+  static const Color yellow = Color(0xffffcc00);
 }

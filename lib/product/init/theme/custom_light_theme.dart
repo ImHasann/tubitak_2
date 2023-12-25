@@ -27,6 +27,8 @@ final class CustomLightTheme implements CustomTheme {
           headlineMedium: TextStyle(color: Colors.blue),
           bodySmall: TextStyle(color: ColorConstants.greyPrimary),
           bodyMedium: TextStyle(color: ColorConstants.greyPrimary),
+          displaySmall: TextStyle(color: ColorConstants.blackPrimary),
+          
         ),
         inputDecorationTheme: InputDecorationTheme(
           labelStyle: const TextStyle(color: ColorConstants.greyPrimary),
