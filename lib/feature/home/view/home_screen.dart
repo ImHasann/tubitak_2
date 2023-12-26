@@ -2,6 +2,7 @@
 
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:tubitak_2/product/navigation/app_router.dart';
 import 'package:tubitak_2/product/utility/constants/color_constants.dart';
 
 @RoutePage()
@@ -22,7 +23,14 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        actions: [
+          TextButton(
+            child: const Text('Takvim'),
+            onPressed: () {},
+          ),
+        ],
+      ),
       body: Padding(
         padding: const EdgeInsets.all(8),
         child: Column(
@@ -112,6 +120,32 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                 ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8),
+              child: Container(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Bugünün Yemekleri',
+                      style: Theme.of(context).textTheme.titleLarge?.copyWith(),
+                    ),
+                    TextButton(
+                      onPressed: ()  {
+                         context.pushRoute(const AddMealRoute());
+                      },
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Icon(Icons.add),
+                          Text('Öğün Ekle', style: Theme.of(context).textTheme.titleLarge?.copyWith()),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
             Expanded(
@@ -289,7 +323,13 @@ class MetricWidget extends StatelessWidget {
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [Text(metric), Icon(icon)],
+              children: [
+                Text(
+                  metric,
+                  style: Theme.of(context).textTheme.titleLarge?.copyWith(),
+                ),
+                Icon(icon),
+              ],
             ),
             Text(
               metricvalue,

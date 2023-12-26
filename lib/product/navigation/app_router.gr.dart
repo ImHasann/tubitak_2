@@ -15,6 +15,12 @@ abstract class _$AppRouter extends RootStackRouter {
 
   @override
   final Map<String, PageFactory> pagesMap = {
+    AddMealRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const AddMealScreen(),
+      );
+    },
     CalenderRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -45,6 +51,12 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const ProfileScreen(),
       );
     },
+    RouterRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const RouterScreen(),
+      );
+    },
     SplashRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -52,6 +64,20 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
   };
+}
+
+/// generated route for
+/// [AddMealScreen]
+class AddMealRoute extends PageRouteInfo<void> {
+  const AddMealRoute({List<PageRouteInfo>? children})
+      : super(
+          AddMealRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'AddMealRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for
@@ -120,6 +146,20 @@ class ProfileRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'ProfileRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [RouterScreen]
+class RouterRoute extends PageRouteInfo<void> {
+  const RouterRoute({List<PageRouteInfo>? children})
+      : super(
+          RouterRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'RouterRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }
