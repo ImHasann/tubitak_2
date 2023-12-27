@@ -40,9 +40,13 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
     LoginRoute.name: (routeData) {
+      final args = routeData.argsAs<LoginRouteArgs>();
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const LoginScreen(),
+        child: LoginScreen(
+          args.onResult,
+          key: args.key,
+        ),
       );
     },
     ProfileRoute.name: (routeData) {
@@ -51,10 +55,10 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const ProfileScreen(),
       );
     },
-    RouterRoute.name: (routeData) {
+    RouteRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const RouterScreen(),
+        child: const RouteScreen(),
       );
     },
     SplashRoute.name: (routeData) {
@@ -124,16 +128,39 @@ class HomeRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [LoginScreen]
-class LoginRoute extends PageRouteInfo<void> {
-  const LoginRoute({List<PageRouteInfo>? children})
-      : super(
+class LoginRoute extends PageRouteInfo<LoginRouteArgs> {
+  LoginRoute({
+    required dynamic Function(bool?) onResult,
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
           LoginRoute.name,
+          args: LoginRouteArgs(
+            onResult: onResult,
+            key: key,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'LoginRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static const PageInfo<LoginRouteArgs> page = PageInfo<LoginRouteArgs>(name);
+}
+
+class LoginRouteArgs {
+  const LoginRouteArgs({
+    required this.onResult,
+    this.key,
+  });
+
+  final dynamic Function(bool?) onResult;
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'LoginRouteArgs{onResult: $onResult, key: $key}';
+  }
 }
 
 /// generated route for
@@ -151,15 +178,15 @@ class ProfileRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [RouterScreen]
-class RouterRoute extends PageRouteInfo<void> {
-  const RouterRoute({List<PageRouteInfo>? children})
+/// [RouteScreen]
+class RouteRoute extends PageRouteInfo<void> {
+  const RouteRoute({List<PageRouteInfo>? children})
       : super(
-          RouterRoute.name,
+          RouteRoute.name,
           initialChildren: children,
         );
 
-  static const String name = 'RouterRoute';
+  static const String name = 'RouteRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }

@@ -1,4 +1,4 @@
-// ignore_for_file: public_member_api_docs, avoid_unnecessary_containers, use_build_context_synchronously
+// ignore_for_file: public_member_api_docs, avoid_unnecessary_containers, use_build_context_synchronously, lines_longer_than_80_chars
 
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
@@ -133,8 +133,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       style: Theme.of(context).textTheme.titleLarge?.copyWith(),
                     ),
                     TextButton(
-                      onPressed: ()  {
-                         context.pushRoute(const AddMealRoute());
+                      onPressed: () {
+                        context.pushRoute(const AddMealRoute());
                       },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -148,55 +148,120 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
             ),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.spaceAround,
+            //   children: [
+            //     const Text('Home'),
+            //     ElevatedButton(
+            //       onPressed: () {
+            //         context.pushRoute(LoginRoute(onResult: (bool) {}));
+            //       },
+            //       child: const Text('logine gidiş'),
+            //     ),
+            //     ElevatedButton(
+            //       onPressed: () async {
+            //         await FirebaseAuth.instance.signOut();
+            //         await context.pushRoute(LoginRoute(onResult: (bool) {}));
+            //       },
+            //       child: const Text('Çıkış Yap'),
+            //     ),
+            //     ElevatedButton(
+            //       onPressed: () async {
+            //         await context.pushRoute(const ProfileRoute());
+            //       },
+            //       child: const Text('profile gidiş'),
+            //     ),
+            //   ],
+            // ),
             Expanded(
-              flex: 4,
+              flex: 2,
               child: ListView.builder(
                 itemCount: entries.length,
+                scrollDirection: Axis.horizontal,
                 itemBuilder: (BuildContext context, int index) {
                   return Padding(
                     padding: const EdgeInsets.all(8),
                     child: Container(
-                      height: 100,
-                      color: Colors.amber[colorCodes[index]],
-                      child: const Column(
-                        children: [
-                          Expanded(
-                            child: Row(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12),
+                        color: ColorConstants.limeGreen,
+                      ),
+                      width: MediaQuery.of(context).size.width / 2,
+                      child: const Padding(
+                        padding: EdgeInsets.all(8),
+                        child: Column(
+                          children: [
+                            Expanded(
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Kahvaltı',
+                                    style: TextStyle(fontSize: 24, color: ColorConstants.white),
+                                  ),
+                                  Text(
+                                    '7.46',
+                                    style: TextStyle(fontSize: 24, color: ColorConstants.white),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text('Kahvaltı'),
-                                Text('7.46'),
+                                Column(
+                                  children: [
+                                    Icon(
+                                      Icons.star,
+                                      color: ColorConstants.white,
+                                    ),
+                                    Text(
+                                      'Kalori',
+                                      style: TextStyle(color: ColorConstants.white),
+                                    ),
+                                    Text(
+                                      '500 KCal',
+                                      style: TextStyle(color: ColorConstants.white),
+                                    ),
+                                  ],
+                                ),
+                                Column(
+                                  children: [
+                                    Icon(
+                                      Icons.water,
+                                      color: ColorConstants.white,
+                                    ),
+                                    Text(
+                                      'Kalori',
+                                      style: TextStyle(color: ColorConstants.white),
+                                    ),
+                                    Text(
+                                      '500 KCal',
+                                      style: TextStyle(color: ColorConstants.white),
+                                    ),
+                                  ],
+                                ),
+                                Column(
+                                  children: [
+                                    Icon(
+                                      Icons.car_crash,
+                                      color: ColorConstants.white,
+                                    ),
+                                    Text(
+                                      'Kalori',
+                                      style: TextStyle(color: ColorConstants.white),
+                                    ),
+                                    Text(
+                                      '500 KCal',
+                                      style: TextStyle(color: ColorConstants.white),
+                                    ),
+                                  ],
+                                ),
                               ],
                             ),
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Column(
-                                children: [
-                                  Icon(Icons.star),
-                                  Text('Kalori'),
-                                  Text('500 KCal'),
-                                ],
-                              ),
-                              Column(
-                                children: [
-                                  Icon(Icons.water),
-                                  Text('Kalori'),
-                                  Text('500 KCal'),
-                                ],
-                              ),
-                              Column(
-                                children: [
-                                  Icon(Icons.car_crash),
-                                  Text('Kalori'),
-                                  Text('500 KCal'),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   );
@@ -206,31 +271,6 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
       ),
-      // body: Row(
-      //   mainAxisAlignment: MainAxisAlignment.spaceAround,
-      //   children: [
-      //     const Text('Home'),
-      //     ElevatedButton(
-      //       onPressed: () {
-      //         context.pushRoute(const LoginRoute());
-      //       },
-      //       child: const Text('logine gidiş'),
-      //     ),
-      //     ElevatedButton(
-      //       onPressed: () async {
-      //         await FirebaseAuth.instance.signOut();
-      //         await context.pushRoute(const LoginRoute());
-      //       },
-      //       child: const Text('Çıkış Yap'),
-      //     ),
-      //     ElevatedButton(
-      //       onPressed: () async {
-      //         await context.pushRoute(const ProfileRoute());
-      //       },
-      //       child: const Text('profile gidiş'),
-      //     ),
-      //   ],
-      // ),
     );
   }
 }

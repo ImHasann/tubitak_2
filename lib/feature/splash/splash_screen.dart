@@ -27,7 +27,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen> with _SplashViewLis
   }
 
   void checkUser(User? user) {
-    ref.read(splashProvider.notifier).fetchUserDetail(user,context);
+    ref.read(splashProvider.notifier).fetchUserDetail(user);
   }
 
   @override
