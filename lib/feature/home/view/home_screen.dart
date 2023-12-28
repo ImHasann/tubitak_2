@@ -1,8 +1,10 @@
 // ignore_for_file: public_member_api_docs, avoid_unnecessary_containers, use_build_context_synchronously, lines_longer_than_80_chars
 
 import 'package:auto_route/auto_route.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_ui_firestore/firebase_ui_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:tubitak_2/product/navigation/app_router.dart';
+import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:tubitak_2/product/utility/constants/color_constants.dart';
 
 @RoutePage()
@@ -14,263 +16,79 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final List<String> entries = <String>['A', 'B', 'C'];
-  final List<int> colorCodes = <int>[
-    600,
-    500,
-    100,
-  ];
+  final usersQuery = FirebaseFirestore.instance.collection('users');
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         actions: [
-          TextButton(
-            child: const Text('Takvim'),
-            onPressed: () {},
-          ),
+          TextButton(child: const Text('Takvim'), onPressed: () {}),
         ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(8),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Expanded(
-              flex: 6,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Expanded(
-                    flex: 5,
-                    child: Row(
-                      children: [
-                        const Expanded(child: CaloriWidget()),
-                        const SizedBox(
-                          width: 5,
-                        ),
-                        Expanded(
-                          child: Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(12),
-                              border: Border.all(
-                                color: ColorConstants.greyLighter,
-                              ),
-                            ),
-                            child: const Column(
-                              children: [
-                                Expanded(
-                                  child: TripleWidgets(
-                                    circularBarValue: '',
-                                    nutritionName: '',
-                                    nutritionValue: '',
-                                    progressBarColor: ColorConstants.orange,
-                                  ),
-                                ),
-                                Expanded(
-                                  child: TripleWidgets(
-                                    circularBarValue: '',
-                                    nutritionName: '',
-                                    nutritionValue: '',
-                                    progressBarColor: ColorConstants.yellow,
-                                  ),
-                                ),
-                                Expanded(
-                                  child: TripleWidgets(
-                                    circularBarValue: '',
-                                    nutritionName: '',
-                                    nutritionValue: '',
-                                    progressBarColor: ColorConstants.pink,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  const Expanded(
-                    flex: 5,
+            const Row(
+              children: [
+                Expanded(child: CaloriWidget()),
+                Expanded(
+                  child: Padding(
+                    padding: EdgeInsets.all(8),
                     child: Column(
                       children: [
-                        Expanded(
-                          child: MetricWidget(
-                            dividerColor: ColorConstants.skyBlue,
-                            metric: 'Water',
-                            metricvalue: '2.1',
-                            icon: Icons.ac_unit,
-                          ),
-                        ),
-                        SizedBox(
-                          height: 5,
-                        ),
-                        Expanded(
-                          child: MetricWidget(
-                            dividerColor: ColorConstants.orange,
-                            metric: 'Sleep',
-                            metricvalue: '5',
-                            icon: Icons.bed,
-                          ),
-                        ),
+                        MetricWidget(dividerColor: ColorConstants.blackLighter, metric: 'Protein', metricvalue: '15', icon: Icons.abc),
+                        MetricWidget(dividerColor: ColorConstants.blackLighter, metric: 'Protein', metricvalue: '15', icon: Icons.abc),
+                        MetricWidget(dividerColor: ColorConstants.blackLighter, metric: 'Protein', metricvalue: '15', icon: Icons.abc),
                       ],
                     ),
                   ),
+                ),
+              ],
+            ),
+            const Expanded(
+              child: Column(
+                children: [
+                  MetricWidget(dividerColor: Colors.red, metric: 'metri', metricvalue: '14', icon: Icons.access_alarms_rounded),
+                  MetricWidget(dividerColor: Colors.red, metric: 'metri', metricvalue: '14', icon: Icons.access_alarms_rounded),
                 ],
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(8),
-              child: Container(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Bugünün Yemekleri',
-                      style: Theme.of(context).textTheme.titleLarge?.copyWith(),
-                    ),
-                    TextButton(
-                      onPressed: () {
-                        context.pushRoute(const AddMealRoute());
-                      },
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const Icon(Icons.add),
-                          Text('Öğün Ekle', style: Theme.of(context).textTheme.titleLarge?.copyWith()),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            // Row(
-            //   mainAxisAlignment: MainAxisAlignment.spaceAround,
-            //   children: [
-            //     const Text('Home'),
-            //     ElevatedButton(
-            //       onPressed: () {
-            //         context.pushRoute(LoginRoute(onResult: (bool) {}));
-            //       },
-            //       child: const Text('logine gidiş'),
-            //     ),
-            //     ElevatedButton(
-            //       onPressed: () async {
-            //         await FirebaseAuth.instance.signOut();
-            //         await context.pushRoute(LoginRoute(onResult: (bool) {}));
-            //       },
-            //       child: const Text('Çıkış Yap'),
-            //     ),
-            //     ElevatedButton(
-            //       onPressed: () async {
-            //         await context.pushRoute(const ProfileRoute());
-            //       },
-            //       child: const Text('profile gidiş'),
-            //     ),
-            //   ],
-            // ),
+            const Expanded(child: _MealText()),
             Expanded(
-              flex: 2,
-              child: ListView.builder(
-                itemCount: entries.length,
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (BuildContext context, int index) {
-                  return Padding(
-                    padding: const EdgeInsets.all(8),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12),
-                        color: ColorConstants.limeGreen,
-                      ),
-                      width: MediaQuery.of(context).size.width / 2,
-                      child: const Padding(
-                        padding: EdgeInsets.all(8),
-                        child: Column(
-                          children: [
-                            Expanded(
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    'Kahvaltı',
-                                    style: TextStyle(fontSize: 24, color: ColorConstants.white),
-                                  ),
-                                  Text(
-                                    '7.46',
-                                    style: TextStyle(fontSize: 24, color: ColorConstants.white),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Column(
-                                  children: [
-                                    Icon(
-                                      Icons.star,
-                                      color: ColorConstants.white,
-                                    ),
-                                    Text(
-                                      'Kalori',
-                                      style: TextStyle(color: ColorConstants.white),
-                                    ),
-                                    Text(
-                                      '500 KCal',
-                                      style: TextStyle(color: ColorConstants.white),
-                                    ),
-                                  ],
-                                ),
-                                Column(
-                                  children: [
-                                    Icon(
-                                      Icons.water,
-                                      color: ColorConstants.white,
-                                    ),
-                                    Text(
-                                      'Kalori',
-                                      style: TextStyle(color: ColorConstants.white),
-                                    ),
-                                    Text(
-                                      '500 KCal',
-                                      style: TextStyle(color: ColorConstants.white),
-                                    ),
-                                  ],
-                                ),
-                                Column(
-                                  children: [
-                                    Icon(
-                                      Icons.car_crash,
-                                      color: ColorConstants.white,
-                                    ),
-                                    Text(
-                                      'Kalori',
-                                      style: TextStyle(color: ColorConstants.white),
-                                    ),
-                                    Text(
-                                      '500 KCal',
-                                      style: TextStyle(color: ColorConstants.white),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  );
-                },
-              ),
-            ),
+                child: FirestoreListView<Movie>(
+              query: moviesCollection.orderBy('title'),
+              itemBuilder: (context, snapshot) {
+                Movie movie = snapshot.data();
+                return Text(movie.title);
+              },
+            )),
           ],
         ),
       ),
+    );
+  }
+}
+
+class _MealText extends StatelessWidget {
+  const _MealText({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return const Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text('Bugünün Yemeği'),
+        Row(
+          children: [
+            Icon(Icons.add),
+            Text('Öğün Ekle'),
+          ],
+        ),
+      ],
     );
   }
 }
@@ -294,38 +112,19 @@ class CaloriWidget extends StatelessWidget {
               children: [
                 Text(
                   'Kalori',
-                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                        color: ColorConstants.white,
-                      ),
+                  style: Theme.of(context).textTheme.titleLarge?.copyWith(color: ColorConstants.white),
                 ),
-                const Icon(
-                  Icons.fire_extinguisher,
-                  color: ColorConstants.white,
-                  size: 25,
-                ),
+                const Icon(Icons.fire_extinguisher, color: ColorConstants.white, size: 30),
               ],
             ),
-            const Expanded(
-              child: SizedBox(
-                child: Stack(
-                  children: <Widget>[
-                    Center(
-                      child: SizedBox(
-                        width: 150,
-                        height: 150,
-                        child: CircularProgressIndicator(
-                          color: ColorConstants.white,
-                          value: 0.8,
-                          strokeCap: StrokeCap.round,
-                          strokeWidth: 7,
-                          backgroundColor: ColorConstants.limeGreenWithOpac,
-                        ),
-                      ),
-                    ),
-                    Center(child: Text('Test')),
-                  ],
-                ),
-              ),
+            CircularPercentIndicator(
+              radius: 100,
+              center: const Text('12'),
+              progressColor: ColorConstants.white,
+              backgroundColor: ColorConstants.limeGreenWithOpac,
+              lineWidth: 10,
+              percent: 0.2,
+              circularStrokeCap: CircularStrokeCap.round,
             ),
           ],
         ),
@@ -352,7 +151,7 @@ class MetricWidget extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         border: Border.all(
-          color: ColorConstants.greyLighter,
+          color: ColorConstants.metricGrey,
         ),
         borderRadius: BorderRadius.circular(12),
       ),
@@ -364,72 +163,13 @@ class MetricWidget extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  metric,
-                  style: Theme.of(context).textTheme.titleLarge?.copyWith(),
-                ),
+                Text(metric, style: Theme.of(context).textTheme.titleMedium?.copyWith()),
                 Icon(icon),
               ],
             ),
-            Text(
-              metricvalue,
-              style: Theme.of(context).textTheme.headlineLarge?.copyWith(),
-            ),
+            Text(metricvalue, style: Theme.of(context).textTheme.titleLarge?.copyWith()),
             Divider(
               color: dividerColor,
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class TripleWidgets extends StatelessWidget {
-  const TripleWidgets({
-    required this.circularBarValue,
-    required this.nutritionName,
-    required this.nutritionValue,
-    required this.progressBarColor,
-    super.key,
-  });
-  final String circularBarValue;
-  final String nutritionName;
-  final String nutritionValue;
-  final Color progressBarColor;
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      child: Container(
-        child: Row(
-          children: [
-            Expanded(
-              child: SizedBox(
-                child: Stack(
-                  children: <Widget>[
-                    Center(
-                      child: SizedBox(
-                        child: CircularProgressIndicator(
-                          backgroundColor: ColorConstants.greyLighter,
-                          color: progressBarColor,
-                          value: 0.5,
-                        ),
-                      ),
-                    ),
-                    Center(child: Text(circularBarValue)),
-                  ],
-                ),
-              ),
-            ),
-            Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Text(nutritionName.isEmpty ? '0' : nutritionName),
-                  Text(nutritionValue.isEmpty ? '0' : nutritionValue),
-                ],
-              ),
             ),
           ],
         ),

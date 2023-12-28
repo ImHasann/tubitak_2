@@ -30,4 +30,6 @@ class ColorConstants {
   static const Color pink = Color(0xffe93e63);
 
   static const Color yellow = Color(0xffffcc00);
+
+  static const Color metricGrey = Color.fromARGB(255, 177, 176, 176);
 }
